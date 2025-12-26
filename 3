@@ -1,0 +1,153 @@
+#include<stdio.h> 
+int dist[50][50],temp[50][50],n,i,j,k,x; 
+void dvr(); 
+int main() 
+{ 
+    printf("\nEnter the number of nodes : "); 
+Dept of ISE, PESCE 
+ 
+22 
+ 
+    scanf("%d",&n); 
+    printf("\nEnter the distance matrix :\n"); 
+    for(i=0;i<n;i++) 
+    { 
+        for(j=0;j<n;j++) 
+        {    
+            scanf("%d",&dist[i][j]); 
+            dist[i][i]=0; 
+            temp[i][j]=j; 
+        } 
+        printf("\n"); 
+ } 
+     dvr();  
+     printf("enter value of i &j:"); 
+     scanf("%d",&i); 
+  scanf("%d",&j);    
+  printf("enter the new cost"); 
+  scanf("%d",&x);    
+  dist[i][j]=x; 
+  printf("After update\n\n");      
+     dvr(); 
+  return 0;  
+} 
+void dvr() 
+{ 
+ for (i = 0; i < n; i++) 
+            for (j = 0; j < n; j++) 
+             for (k = 0; k < n; k++) 
+                 if (dist[i][k] + dist[k][j] < dist[i][j]) 
+                 { 
+                     dist[i][j] = dist[i][k] + dist[k][j]; 
+                     temp[i][j] = k; 
+                 } 
+                  
+ for(i=0;i<n;i++) 
+        { 
+            printf("\n\nState value for router %d is \n",i+1); 
+            for(j=0;j<n;j++) 
+                printf("\t\nnode %d via %d Distance%d",j+1,temp[i][j]+1,dist[i][j]); 
+        }    
+    printf("\n\n"); 
+ 
+} 
+ 
+output:- 
+ 
+Enter the number of nodes : 4 
+ 
+Enter the distance matrix : 
+0 
+Dept of ISE, PESCE 
+ 
+23 
+ 
+12 
+9 
+16 
+ 
+20 
+0 
+18 
+4 
+ 
+15 
+8 
+0 
+32 
+ 
+41 
+24 
+51 
+0 
+ 
+ 
+ 
+State value for router 1 is 
+ 
+node 1 via 1 Distance0 
+node 2 via 2 Distance12 
+node 3 via 3 Distance9 
+node 4 via 4 Distance16 
+ 
+State value for router 2 is 
+ 
+node 1 via 1 Distance20 
+node 2 via 2 Distance0 
+node 3 via 3 Distance18 
+node 4 via 4 Distance4 
+ 
+State value for router 3 is 
+ 
+node 1 via 1 Distance15 
+node 2 via 2 Distance8 
+node 3 via 3 Distance0 
+node 4 via 2 Distance12 
+ 
+State value for router 4 is 
+ 
+node 1 via 1 Distance41 
+node 2 via 2 Distance24 
+node 3 via 2 Distance42 
+node 4 via 4 Distance0 
+ 
+enter value of i &j: 
+Dept of ISE, PESCE 
+ 
+24 
+ 
+1 
+3 
+enter the new cost 
+68 
+After update 
+ 
+ 
+ 
+State value for router 1 is 
+ 
+node 1 via 1 Distance0 
+node 2 via 2 Distance12 
+node 3 via 3 Distance9 
+node 4 via 4 Distance16 
+ 
+State value for router 2 is 
+ 
+node 1 via 1 Distance20 
+node 2 via 2 Distance0 
+node 3 via 3 Distance18 
+node 4 via 3 Distance30 
+ 
+State value for router 3 is 
+ 
+node 1 via 1 Distance15 
+node 2 via 2 Distance8 
+node 3 via 3 Distance0 
+node 4 via 2 Distance12 
+ 
+State value for router 4 is 
+ 
+node 1 via 1 Distance41 
+node 2 via 2 Distance24 
+node 3 via 2 Distance42 
+node 4 via 4 Distance0 
