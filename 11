@@ -1,0 +1,27 @@
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+from sklearn.cluster import DBSCAN 
+from sklearn.preprocessing import StandardScaler 
+df=pd.read_csv('Mall_Customers.csv') 
+df.head() 
+x_train=df[['Age','Annual Income (k$)','Spending Score (1-100)']] 
+x_train 
+scaler = StandardScaler() 
+X_scaled = scaler.fit_transform(X) 
+# Apply DBSCAN 
+dbscan = DBSCAN(eps=0.5, min_samples=5)  # Adjust 'eps' and 'min_samples' as needed 
+y_dbscan = dbscan.fit_predict(X_scaled) 
+# Add cluster labels to the original dataset 
+df['Cluster'] = y_dbscan 
+# Display clustering results 
+print(df['Cluster'].value_counts()) 
+# Visualize the clusters 
+plt.figure(figsize=(8, 6)) 
+plt.scatter(X['Annual Income (k$)'], X['Spending Score (1-100)'], c=y_dbscan, cmap='rainbow', s=50, 
+alpha=0.7) 
+plt.title("DBSCAN Clustering on Mall Customers Dataset") 
+plt.xlabel("Annual Income (k$)") 
+plt.ylabel("Spending Score (1-100)") 
+plt.colorbar(label="Cluster Label") 
+plt.show()
